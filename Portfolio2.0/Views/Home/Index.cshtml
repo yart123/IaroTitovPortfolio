@@ -1,7 +1,16 @@
-﻿@{
-	Layout = "_Main";
-}
+﻿@using  Portfolio.Models
+@model IEnumerable<SkillGroupEntity>
+@{Layout = "_Main";}
 
 <h1>Index</h1>
 
 Home!
+
+@foreach (var group in Model)
+{
+	<h1>@(group.SkillGroupName + ":")</h1>
+	@foreach (var skill in group.skills)
+	{
+		<p>@skill.SkillName</p>
+	}
+}

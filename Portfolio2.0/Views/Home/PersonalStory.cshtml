@@ -1,7 +1,14 @@
-﻿
+﻿@using  Portfolio.Models
+@model IEnumerable<EventEntity>
 @{
 	Layout = "_Main";
 }
 
 <h1>Personal Story</h1>
 
+@foreach (var e in Model)
+{
+	<h1>@e.Date</h1>
+	<h3>@e.Description</h3>
+	<img src="@e.Image"/>
+}

@@ -1,7 +1,34 @@
-﻿
+﻿@using  Portfolio.Models
+@model IEnumerable<ProjectEntity>
 @{
 	Layout = "_Main";
 }
 
 <h1>Projects</h1>
 
+@foreach (var project in Model)
+{
+	<h1>@project.Title</h1>
+	<h5>@project.Genre</h5>
+	<p>@project.Description</p>
+	<h3>SKills:</h3>
+	foreach (var skill in @project.skills)
+	{
+		<span>@skill.SkillName</span>
+	}
+	<h3>Videos:</h3>
+	foreach (var vid in @project.videos)
+	{
+		<span>@vid.Link</span>
+	}
+	<h3>Links:</h3>
+	foreach (var link in @project.links)
+	{
+		<span>@link.Link</span>
+	}
+	<h3>Screens:</h3>
+	foreach (var image in @project.images)
+	{
+		<img src="@image">
+	}
+}
