@@ -1,16 +1,23 @@
 ﻿@using  Portfolio.Models
-@model IEnumerable<SkillGroupEntity>
+@model string
 @{Layout = "_Main";}
-
-<h1>Index</h1>
-
-Home!
-
-@foreach (var group in Model)
-{
-	<h1>@(group.SkillGroupName + ":")</h1>
-	@foreach (var skill in group.skills)
-	{
-		<p>@skill.SkillName</p>
-	}
+@section Scripts{
+	<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+	<script>
+		var iaroSkillsJson = '@(Html.Raw(Model))';
+	</script>
+	<script type="module" src="~/scripts/graph.js"></script>
 }
+
+<div class="main">
+	<div class="mainfragment" id="title">
+		<h1>Iaro Titov</h1>
+		<h6>Software and Game Developer</h6>
+	</div>
+	<div class="mainfragment" id="photo">
+		<img class="logo" src="~/images/logo.png" />
+		<img class="iaro" src="~/images/Iaro.png" />
+	</div>
+	<div id="mynetwork"></div>
+	<img id="ripple" src="~/images/ripple.svg">
+</div>

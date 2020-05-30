@@ -75,7 +75,7 @@ namespace Portfolio
                 CloudBlobContainer imageFolder = blobClient.GetContainerReference("projects");
                 var directory = imageFolder.GetDirectoryReference(project.ImageFolder);
                 var imageList = await directory.ListBlobsSegmentedAsync(null);
-                project.images = imageList.Results.OfType<CloudBlockBlob>().Select(b => b.Uri.ToString()).ToList();
+                project.images = imageList.Results.OfType<CloudBlockBlob>().Select(b => b.Uri.ToString()).OrderBy(x => x).ToList();
             });
             await Task.WhenAll(tasks);
 

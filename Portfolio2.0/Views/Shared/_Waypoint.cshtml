@@ -1,0 +1,16 @@
+﻿@model Portfolio.Models.EventEntity
+
+<div class="waypoint">
+	<div class="waypointWhite">
+		<div class="waypointBlack">
+			<div class="waypointData @(Model.Right? "rightPopup" : "leftPopup")">
+				<h2>@Model.Date.ToString("MM/dd/yyyy")</h2>
+				<div class="waypointPop">
+					<img src="@Model.Image"/>
+					<p>@Model.Description</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

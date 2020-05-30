@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Portfolio.Models;
 
 namespace Portfolio.Controllers
@@ -27,17 +28,24 @@ namespace Portfolio.Controllers
             ViewBag.RightLink = new KeyValuePair<string, string>("Projects", "/Projects");
 
             IEnumerable<SkillGroupEntity> skills = await storageConnector.LoadSkillGroups();
-            return View(skills);
+            string skillsJson = JsonConvert.SerializeObject(skills, new JsonSerializerSettings
+            {
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+            });
+
+            return View(model: skillsJson);
         }
 
         [HttpGet]
         [Route("MyStory")]
         public async Task<IActionResult> PersonalStoryAsync()
         {
-            ViewBag.LeftLink = new KeyValuePair<string, string>("Home", "/");
+            ViewBag.LeftLink = new KeyValuePair<string, string>("Home Page", "/");
             ViewBag.RightLink = new KeyValuePair<string, string>("Projects", "/Projects");
 
-            IEnumerable<EventEntity> events = await storageConnector.LoadEvents();
+            List<EventEntity> events = (await storageConnector.LoadEvents()).ToList();
+            int i = 0;
+            events.ForEach(x => x.Right = i++ % 2 == 0);
             return View(events);
         }
 
@@ -46,7 +54,7 @@ namespace Portfolio.Controllers
         public async Task<IActionResult> ProjectsAsync()
         {
             ViewBag.LeftLink = new KeyValuePair<string, string>("My Story", "/MyStory");
-            ViewBag.RightLink = new KeyValuePair<string, string>("Home", "/");
+            ViewBag.RightLink = new KeyValuePair<string, string>("Home Page", "/");
 
             IEnumerable<ProjectEntity> projects = await storageConnector.LoadProjects();
 

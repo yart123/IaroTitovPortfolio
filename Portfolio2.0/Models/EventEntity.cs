@@ -18,5 +18,8 @@ namespace Portfolio.Models
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+
+        [IgnoreProperty]
+        public bool Right { get; set; }
     }
 }

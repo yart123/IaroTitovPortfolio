@@ -2,19 +2,17 @@
 <head>
 	<title>Iaroslav Titov Portfolio</title>
 	<link rel="stylesheet" href="~/styles/style.css" />
-
+	<script type="module" src="~/scripts/animations.js"></script>
+	@RenderSection("Scripts")
 </head>
 	<body>
 		<header>
-			<a href="@ViewBag.LeftLink.Value">@ViewBag.LeftLink.Key.ToUpper()</a>
+			<a href="@ViewBag.LeftLink.Value" class="textAlignRight">@ViewBag.LeftLink.Key.ToUpper()</a>
 			<img src="~/images/logo.png" />
 			<a href="@ViewBag.RightLink.Value">@ViewBag.RightLink.Key.ToUpper()</a>
 		</header>
 
-	<h1>Header! </h1>
-
 	@RenderBody()
 
-	<h3>Footer! </h3>
 	</body>
 </html>

@@ -2,6 +2,14 @@
 	--main-color: #111111;
 	--text-color: #eeeeee;
 	--highlight-color: #ffd200;
+
+	--main-fragment-offset: 12.5vw;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+	:root {
+		--main-fragment-offset: -5vw;
+	}
 }
 
 @font-face {
@@ -19,11 +27,20 @@
 	src: url('../fonts/Revamped/Revamped.otf');
 }
 
-body {
+html, body {
 	background-color: var(--main-color);
-	color: var(--text-color);
 	font-family: Cambria;
+	padding: 0;
+	margin: 0;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
 }
+
+	body:focus {
+		outline: none;
+	}
 
 header {
 	max-height: 10vh;
@@ -32,6 +49,11 @@ header {
 	justify-content: center;
 	align-items: center;
 	font-family: Revamped;
+	background-color: transparent;
+	overflow: visible;
+	position: absolute;
+	z-index: 10;
+	width: 100%;
 }
 
 	header img {
@@ -42,13 +64,347 @@ header {
 		font-size: 300%;
 		margin: 10px;
 		height: min-content;
+		width: 30vw;
+		white-space: nowrap;
 	}
+
+.textAlignRight {
+	text-align:right;
+}
 
 a:link, a:visited {
 	text-decoration: none;
-	color:var(--highlight-color);
+	color: var(--highlight-color);
 }
 
 a:hover, a:active {
 	color: var(--text-color);
+}
+
+.main {
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+	min-height: 150vh;
+	max-height: 150vh;
+	max-width: 100vw;
+	position: relative;
+	text-align: center;
+	color: var(--highlight-color);
+}
+
+.mainfragment {
+	height: 30vh;
+	width: 30vh;
+	margin-top:50vh;
+	position: relative;
+	display: inline-block;
+}
+
+#title {
+	margin-top: 35vh;
+	text-align:left;
+	right:var(--main-fragment-offset);
+}
+
+#photo {
+	left: var(--main-fragment-offset);
+}
+
+.mainfragment .logo {
+	height: 100%;
+}
+
+.mainfragment .iaro {
+	position: absolute;
+	height: 170%;
+	right: -10%;
+	bottom: 26%;
+}
+
+h1 {
+	font-size: 6em;
+	margin: 0;
+	color: var(--text-color);
+	overflow: visible;
+	white-space: nowrap;
+}
+
+h6 {
+	font-size: 3em;
+	margin: 0;
+}
+
+#mynetwork {
+	width: 100%;
+	height: 130%;
+	position: absolute;
+	z-index: 1;
+}
+
+.vis-active:focus {
+	outline: none;
+}
+
+.vis-network {
+	outline: none;
+}
+
+#ripple {
+	display: inline-block;
+	position: absolute;
+	z-index: 10;
+	transform-origin: center center;
+	transform: translate(-100px, -100px);
+	pointer-events: none;
+	opacity: 0;
+}
+
+.projectPack {
+	top: 10vh;
+	position: relative;
+	display: block;
+	text-align: center;
+	user-select: none;
+}
+
+.project {
+	width: 80vw;
+	min-height:45vw;
+	position: relative;
+	display: inline-flex;
+	text-align: left;
+	
+	justify-content:center;
+	align-items:center;
+	margin: 5vh 0;
+}
+
+	.project .slide {
+		position: absolute;
+		max-height: 100%;
+		max-width: 100%;
+		min-height: 100%;
+		min-width: 100%;
+		object-fit: contain;
+		border: 0.25vh solid var(--highlight-color);
+		background-color: var(--main-color);
+	}
+
+.slide {
+	opacity: 0;
+	z-index: -1;
+}
+
+.project .selected {
+	opacity: 1;
+	z-index: 1;
+}
+
+.project .right {
+	opacity: 1;
+	transform: scale(.9) translateX(calc(5% + 5vw));
+	z-index: 0;
+}
+
+.project .left {
+	opacity: 1;
+	transform: scale(.9) translateX(calc(-5% + -5vw));
+	z-index: 0;
+}
+
+.slide * {
+	position: absolute;
+}
+
+.slide img {
+	position: absolute;
+	max-height: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+	object-fit: contain;
+	background-color: var(--main-color);
+	border:0;
+}
+
+.slide h1 {
+	text-align: center;
+	width: 100%;
+	font-size: 4em;
+	color: var(--highlight-color);
+	position:relative;
+}
+
+.slide h3 {
+	text-align: center;
+	color: var(--text-color);
+	width: 100%;
+	position: relative;
+	margin: 0;
+}
+
+
+.slide p {
+	position: absolute;
+	color: var(--highlight-color);
+	border-top: .25vh solid;
+	border-right: .25vh solid;
+	width: 33.33%;
+	bottom: 0;
+	margin: 0;
+	padding: .5vh;
+	background: var(--main-color);
+	font-weight: bold;
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+.slide p:hover {
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.slide .linkflex {
+	display: inline-flex;
+	position: absolute;
+	flex-flow: row;
+	bottom: 0;
+	right: 0;
+}
+
+.slide .link {
+	font-weight: bold;
+	bottom: 0;
+	right: 0;
+	background: var(--highlight-color);
+	border-radius: 25px;
+	border: 0;
+	padding: 0.5em;
+	font-family: Cambria;
+	margin: 0 1.5em 1em 0;
+	font-size: 1.5em;
+	color: var(--main-color);
+	position: relative;
+}
+
+.slide .skillflex {
+	display: inline-flex;
+	position: absolute;
+	flex-flow: column;
+	top: 0;
+}
+
+.slide .skill {
+	font-weight: bold;
+	left: 0;
+	top: 0;
+	background: var(--highlight-color);
+	border-radius: 0 25px 25px 0;
+	border: 0;
+	padding: 0.5em;
+	font-family: Cambria;
+	font-size: 1em;
+	color: var(--main-color);
+	position: relative;
+	margin-top: 1vh;
+}
+
+.fullPath {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	flex-flow: column;
+	top: 35vh;
+	position: relative;
+	margin-bottom: 25vh;
+}
+
+.waypoint {
+	background-color: var(--highlight-color);
+	width: 8vh;
+	height: 8vh;
+	border-radius: 4vh;
+}
+
+.waypointWhite {
+	width: 5vh;
+	height: 5vh;
+	background-color: var(--text-color);
+	border-radius: 50%;
+	border: 1.5vh solid var(--highlight-color);
+	transform-origin: center;
+}
+
+.waypointBlack {
+	width: 2vh;
+	height: 2vh;
+	background-color: var(--main-color);
+	border-radius: 50%;
+	border: 1.5vh solid var(--text-color);
+	transform-origin: center;
+}
+
+.path {
+	width: 4vh;
+	height: 35vh;
+	background-color: var(--highlight-color);
+	margin: -1vh;
+}
+
+.waypointData {
+	width: 0;
+	height: 0;
+	margin: -1vh 0 0 1vh;
+}
+
+.rightPopup h2 {
+	color: var(--highlight-color);
+	right: 25vh;
+	bottom: 3vh;
+	position: relative;
+	font-size: 2.5em;
+}
+
+.rightPopup .waypointPop {
+	width: 40vh;
+	height: 40vh;
+	position: relative;
+	background-color: var(--highlight-color);
+	bottom: 27vh;
+	left: 8vh;
+	text-align: center;
+	border-radius: 2vh;
+}
+
+.waypointData img {
+	max-width: -webkit-fill-available;
+	border-radius: 2vh;
+	margin: 2vh;
+}
+
+.waypointData p {
+	font-size: 1.2em;
+	margin: 0 2vh;
+	font-weight:bold;
+	text-align:left;
+}
+
+.leftPopup h2 {
+	color: var(--highlight-color);
+	left: 6vh;
+	bottom: 3vh;
+	position: relative;
+	font-size: 2.5em;
+}
+
+.leftPopup .waypointPop {
+	width: 40vh;
+	height: 40vh;
+	position: relative;
+	background-color: var(--highlight-color);
+	bottom: 27vh;
+	right: 48vh;
+	text-align: center;
+	border-radius: 2vh;
 }
