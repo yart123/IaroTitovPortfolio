@@ -51,12 +51,23 @@ namespace Portfolio.Controllers
 
         [HttpGet]
         [Route("Projects")]
-        public async Task<IActionResult> ProjectsAsync()
+        public async Task<IActionResult> ProjectsAsync(string skills)
         {
             ViewBag.LeftLink = new KeyValuePair<string, string>("My Story", "/MyStory");
             ViewBag.RightLink = new KeyValuePair<string, string>("Home Page", "/");
 
             IEnumerable<ProjectEntity> projects = await storageConnector.LoadProjects();
+            ViewBag.skills = await storageConnector.LoadSkills();
+
+            ViewBag.filterSkills = new List<string>();
+
+            if (!string.IsNullOrEmpty(skills))
+            {
+                List<string> filterSkills = skills.Split(',').ToList();
+                ViewBag.filterSkills = filterSkills;
+                projects = projects.Where(x => filterSkills.All(x.skills.Select(skill => skill.SkillName).Contains));
+            }
+
 
             return View(projects);
         }

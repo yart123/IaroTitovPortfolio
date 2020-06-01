@@ -29,7 +29,7 @@ anime({
 });
 
 anime({
-    targets: '#title h6, #mynetwork, .projectPack, .fullPath',
+    targets: '#title h6, #mynetwork, .projectPack, .fullPath, .skillFilters',
     opacity: ['0%', '100%'],
     easing: 'easeInBounce',
     delay: 2000

@@ -6,8 +6,8 @@
 
 		<div class="slide">
 			<img src="@Model.images[0]" />
-			<h1>@Model.Title</h1>
-			<h3>@Model.Genre</h3>
+			<h1>@Model.Title <br/><span>@Model.Genre</span></h1>
+			
 			<p>@Model.Description</p>
 			<div class="skillFlex">
 				@foreach (var skill in Model.skills)
@@ -25,7 +25,7 @@
 
 		@foreach (var video in Model.videos)
 		{
-			<video class="slide" loop controls>
+			<video class="slide" loop>
 				<source src="@video.Link" type="video/mp4">
 				Your browser does not support the video tag.
 			</video>

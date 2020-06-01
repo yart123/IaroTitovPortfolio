@@ -73,6 +73,8 @@ window.addEventListener('load', function () {
 	function assignClasses(node) {
 		if (node.previousElementSibling != null) {
 			node.previousElementSibling.className = "slide left";
+			if (node.previousElementSibling.tagName == "VIDEO")
+				node.previousElementSibling.pause();
 
 			if (node.previousElementSibling.previousElementSibling != null) {
 				node.previousElementSibling.previousElementSibling.className = "slide";
@@ -81,8 +83,13 @@ window.addEventListener('load', function () {
 		}
 
 		node.className = " slide selected";
+		if (node.tagName == "VIDEO")
+			node.play();
+
 		if (node.nextElementSibling != null) {
 			node.nextElementSibling.className = "slide right";
+			if (node.nextElementSibling.tagName == "VIDEO")
+				node.nextElementSibling.pause();
 
 			if (node.nextElementSibling.nextElementSibling != null) {
 				node.nextElementSibling.nextElementSibling.className = "slide";

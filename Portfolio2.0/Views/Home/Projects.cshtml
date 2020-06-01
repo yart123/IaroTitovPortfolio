@@ -1,13 +1,32 @@
 ﻿@using  Portfolio.Models
+@using  System.Linq
 @model IEnumerable<ProjectEntity>
 @{Layout = "_Main";}
 @section Scripts{
 	<script type="module" src="~/scripts/projects.js"></script>
 }
 
-<div class="projectPack">
-	@foreach (var project in Model)
-	{
-		@await Html.PartialAsync("_Project", project)
+<div class="skillFilters">
+	@foreach (var skill in ViewBag.skills)
+	{ 
+		bool hasSkill = ViewBag.filterSkills.Contains(skill.SkillName);
+		List<string> filterSkills = ViewBag.filterSkills;
+		string link = hasSkill ?
+			string.Join(",", filterSkills.Where(x => x != skill.SkillName))
+			: string.Join(",", ViewBag.filterSkills) + (filterSkills.Count > 0? "," : "") + skill.SkillName;
+		link = link.Replace("#", "%23");
+
+	<a href='/Projects?skills=@link' class='skillButton @(hasSkill? "filled" : "")'>@skill.SkillName</a>
 	}
-</div>
+	</div>
+
+	<div class="projectPack">
+		@foreach (var project in Model)
+		{
+			@await Html.PartialAsync("_Project", project)
+		}
+		@if (Model.Count() == 0)
+		{
+			<h1 class="noProjects">No projects found with your filters :(</h1>
+		}
+	</div>

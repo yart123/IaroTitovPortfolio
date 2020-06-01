@@ -72,6 +72,10 @@ header {
 	text-align:right;
 }
 
+.textAlignLeft {
+	text-align: left;
+}
+
 a:link, a:visited {
 	text-decoration: none;
 	color: var(--highlight-color);
@@ -230,20 +234,33 @@ h6 {
 
 .slide h1 {
 	text-align: center;
-	width: 100%;
+	width: 60%;
 	font-size: 4em;
 	color: var(--highlight-color);
-	position:relative;
+	position: relative;
+	background-color: var(--main-color);
+	left: 20%;
+	padding: 0 0 1vh 0;
+	border-radius: 0 0 50% 50%;
+	opacity: 1;
+	transition: opacity 0.3s;
 }
 
-.slide h3 {
+.slide span {
 	text-align: center;
 	color: var(--text-color);
 	width: 100%;
 	position: relative;
 	margin: 0;
+	font-size: 0.3em;
+	opacity: 1;
+	transition: opacity 0.3s;
 }
 
+.slide h1:hover {
+	opacity: 0;
+	transition: opacity 0.3s;
+}
 
 .slide p {
 	position: absolute;
@@ -256,6 +273,7 @@ h6 {
 	padding: .5vh;
 	background: var(--main-color);
 	font-weight: bold;
+	font-size: 2em;
 	opacity: 1;
 	transition: opacity 0.3s;
 }
@@ -407,4 +425,100 @@ h6 {
 	right: 48vh;
 	text-align: center;
 	border-radius: 2vh;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+	.leftPopup h2, .rightPopup h2 {
+		display: none;
+	}
+
+	.fullPath {
+		left: -22vh;
+	}
+
+	.path {
+		height: 40vh;
+	}
+
+	.waypointData {
+		margin: 8vh 0 0 1vh;
+	}
+
+	.leftPopup .waypointPop {
+		width: 40vh;
+		height: 40vh;
+		position: relative;
+		background-color: var(--highlight-color);
+		bottom: 27vh;
+		left: 8vh;
+		text-align: center;
+		border-radius: 2vh;
+	}
+}
+
+.contact {
+	width: 2vh;
+	height: 2vh;
+	position: absolute;
+}
+
+	.contact img {
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+.skills {
+	position:relative;
+}
+
+#skypeContact {
+	left: -11.5vh;
+	top: 2vh;
+}
+
+#mailContact {
+	left: -7vh;
+	top: 4vh;
+}
+
+#textContact {
+	left: -2.5vh;
+	top: 2vh;
+}
+
+.skillFilters {
+	width: 80vw;
+	top: 15vh;
+	position: relative;
+	display: block;
+	text-align: center;
+	user-select: none;
+	left: 10vw;
+	margin: 0 0 5vh 0;
+}
+
+.skillButton {
+	background: var(--main-color);
+	color: var(--highlight-color);
+	margin: .25vh;
+	font-size: 1em;
+	border: 0.2vh solid var(--highlight-color);
+	padding: .5vh;
+	display: inline-block;
+}
+
+	.skillButton:hover, .skillButton + .filled {
+		background: var(--highlight-color);
+		color: var(--main-color);
+	}
+
+.skillButton:focus {
+	outline: none;
+}
+
+.noProjects {
+	color: var(--highlight-color);
+	font-size: 4em;
+	padding: 0 10vh;
+	margin: 22vh 0;
 }
