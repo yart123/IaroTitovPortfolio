@@ -57,7 +57,7 @@ namespace Portfolio.Controllers
             ViewBag.RightLink = new KeyValuePair<string, string>("Home Page", "/");
 
             IEnumerable<ProjectEntity> projects = await storageConnector.LoadProjects();
-            ViewBag.skills = await storageConnector.LoadSkills();
+            ViewBag.skills = (await storageConnector.LoadSkills()).Where(skill => projects.Any(project => project.skills.Any(x => x.Id == skill.Id)));
 
             ViewBag.filterSkills = new List<string>();
 

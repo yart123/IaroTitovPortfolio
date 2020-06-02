@@ -57,8 +57,11 @@ window.addEventListener('load', function ()
                 allIds = allIds.concat(skillIds);
                 network.selectNodes(allIds);
             }
-        else
-            window.location.replace("Projects?skills=" + nodes.get(id).label);
+            else {
+                var link = "Projects?skills=" + nodes.get(id).label;
+                link = link.replace("#", "%23");
+                window.location.replace(link);
+            }
 
         network.unselectAll();
 

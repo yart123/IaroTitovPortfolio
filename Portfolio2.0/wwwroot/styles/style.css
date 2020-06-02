@@ -121,9 +121,9 @@ a:hover, a:active {
 
 .mainfragment .iaro {
 	position: absolute;
-	height: 170%;
-	right: -10%;
-	bottom: 26%;
+	height: 180%;
+	right: -12%;
+	bottom: 15%;
 }
 
 h1 {
@@ -457,8 +457,8 @@ h6 {
 }
 
 .contact {
-	width: 2vh;
-	height: 2vh;
+	width: 3vh;
+	height: 3vh;
 	position: absolute;
 }
 
@@ -472,18 +472,23 @@ h6 {
 }
 
 #skypeContact {
-	left: -11.5vh;
-	top: 2vh;
+	left: -15.5vh;
+	top: 3.5vh;
 }
 
 #mailContact {
-	left: -7vh;
+	left: -10vh;
 	top: 4vh;
 }
 
 #textContact {
-	left: -2.5vh;
-	top: 2vh;
+	left: -4.5vh;
+	top: 4vh;
+}
+
+#linkedinContact {
+	left: 1vh;
+	top: 4vh;
 }
 
 .skillFilters {

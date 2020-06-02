@@ -25,7 +25,7 @@ namespace Portfolio
         {
             var eventsTable = tableClient.GetTableReference("Events");
             IEnumerable<EventEntity> events = await eventsTable.ExecuteQuerySegmentedAsync(new TableQuery<EventEntity>(), null);
-            return events;
+            return events.OrderBy(x => x.Date);
         }
 
         public async Task<IEnumerable<SkillEntity>> LoadSkills()
@@ -79,7 +79,7 @@ namespace Portfolio
             });
             await Task.WhenAll(tasks);
 
-            return projects;
+            return projects.OrderByDescending(x => x.ReleaseDate);
         }
     }
 }
