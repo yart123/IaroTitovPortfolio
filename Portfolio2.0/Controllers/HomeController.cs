@@ -18,7 +18,9 @@ namespace Portfolio.Controllers
         public HomeController(IConfiguration config)
         {
             Config = config;
-            storageConnector = new StorageConnector(Config["PortfolioApp:Connections:PortfolioStorage"]);
+            string connectionString = Config["PortfolioApp:Connections:PortfolioStorage"];
+            connectionString = connectionString != null ? connectionString : Config["Heroku:PortfolioStorage"];
+            storageConnector = new StorageConnector(connectionString);
         }
 
         [HttpGet]
@@ -43,7 +45,7 @@ namespace Portfolio.Controllers
             ViewBag.LeftLink = new KeyValuePair<string, string>("Home Page", "/");
             ViewBag.RightLink = new KeyValuePair<string, string>("Projects", "/Projects");
 
-            List<EventEntity> events = (await storageConnector.LoadEvents()).ToList();
+            List<EventEntity> events = (await storageConnector.LoadEvents()).OrderByDescending(x => x.Date).ToList();
             int i = 0;
             events.ForEach(x => x.Right = i++ % 2 == 0);
             return View(events);

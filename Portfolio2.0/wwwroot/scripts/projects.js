@@ -2,6 +2,9 @@
 
 window.addEventListener('load', function () {
 
+	var spinner = document.getElementsByClassName("loading_spinner")[0];
+	spinner.style.display = "none";
+
 	var duration = 300;
 	function slideClick() {
 		if (this.classList.contains("right") || this.classList.contains("left")) {

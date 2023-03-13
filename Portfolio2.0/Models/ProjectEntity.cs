@@ -1,8 +1,6 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.Azure.Cosmos.Table;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Portfolio.Models
 {
@@ -21,6 +19,7 @@ namespace Portfolio.Models
         public string Description { get; set; }
         public string ImageFolder { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public Int32 ImageNumber { get; set; }
 
         public List<ProjectVideoEntity> videos = new List<ProjectVideoEntity>();
         public List<ProjectLinkEntity> links = new List<ProjectLinkEntity>();

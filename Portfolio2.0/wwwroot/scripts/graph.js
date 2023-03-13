@@ -42,7 +42,12 @@ window.addEventListener('load', function ()
         if (id == "root" && network.getConnectedEdges(id).length == 0) {
             nodes.add(skillGroupsNodes);
             edges.add(skillGroupsEdges);
+            nodes.update({ id: id, label: "Resume" });
             network.selectNodes(network.getConnectedNodes(id));
+        }
+        else if (id == "root") {
+            var link = "https://portfoliodata.blob.core.windows.net/projects/Titov_Iaroslav_Resume.pdf";
+            window.location.href = link;
         }
         else
             if (id.includes("group") && network.getConnectedEdges(id).length == 1) {
@@ -57,10 +62,24 @@ window.addEventListener('load', function ()
                 allIds = allIds.concat(skillIds);
                 network.selectNodes(allIds);
             }
-            else {
+            else if (id.includes("group"))
+            {
+                var index = parseInt(id.substring(5));
+                nodes.remove(skillNodes[index]);
+                edges.remove(skillEdges[index]);
+                var skillIds = network.getConnectedNodes("root");
+                var allIds = [];
+                for (var i = 0; i < skillIds.length; i++) {
+                    allIds = allIds.concat(network.getConnectedNodes(skillIds[i]));
+                }
+                allIds = allIds.concat(skillIds);
+                network.selectNodes(allIds);
+                selectedNode = id;
+            }
+            else if (id!="root"){
                 var link = "Projects?skills=" + nodes.get(id).label;
                 link = link.replace("#", "%23");
-                window.location.replace(link);
+                window.location.href = link;
             }
 
         network.unselectAll();
@@ -74,6 +93,9 @@ window.addEventListener('load', function ()
         nodes: nodes,
         edges: edges
     };
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    var timestep = isMobile ? 2.5 : 0.5;
+    var minVel = isMobile ? 1 : 0.05;
     var options = {
         edges: {
             color: '#ffd200',
@@ -110,6 +132,7 @@ window.addEventListener('load', function ()
         physics: {
             minVelocity: 0.05,
             maxVelocity: 5,
+            timestep: timestep,
             barnesHut : {
                 theta: 0.75,
                 gravitationalConstant: -5000,
@@ -155,6 +178,7 @@ window.addEventListener('load', function ()
                 }
             }
             allNodes = allNodes.concat(selection);
+            allNodes.push("root");
             selectedNode = allNodes[Math.floor(Math.random() * allNodes.length)];
             if (selectedNode.includes("skill"))
                 ripple.style.transform = "scale(0.5) translate(-200px, -200px)";

@@ -1,8 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.Azure.Cosmos.Table;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Portfolio.Models
 {
@@ -19,5 +16,6 @@ namespace Portfolio.Models
         [IgnoreProperty]
         public string Title { get { return PartitionKey; } set { PartitionKey = value; } }
         public string Link { get; set; }
+        public string Link2 { get; set; }
     }
 }
