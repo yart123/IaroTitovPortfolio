@@ -2,12 +2,10 @@
 
 	<div class="project" id="project@(Model.Id)">
 
-		@{ bool firstSlide = true; }
-
 		<div class="slide">
 			<img src="@Model.images[0]" />
-			<h1>@Model.Title <br/><span>@Model.Genre</span></h1>
-			
+			<h1>@Model.Title<span>@Model.Genre</span></h1>
+
 			<p>@Model.Description</p>
 			<div class="skillFlex">
 				@foreach (var skill in Model.skills)
@@ -21,18 +19,21 @@
 					<a class="link" href="@link.Link">@link.Title</a>
 				}
 			</div>
+			<img class="arrow" src="~/images/arrow.png">
 		</div>
 
 		@foreach (var video in Model.videos)
 		{
-			<video class="slide" loop>
-				<source src="@video.Link" type="video/mp4">
-				Your browser does not support the video tag.
-			</video>
+	<video class="slide" loop>
+		<source src="@video.Link" type="video/mp4">
+		<source src="@video.Link2" type="video/webm">
+		Your browser does not support the video tag.
+	</video>
 		}
 
 		@for (int i = 1; i < Model.images.Count; i++)
 		{
-			<img src="@Model.images[i]" class="slide" />
+			<img loading="eager" src="@Model.images[i]" class="slide" />
 		}
+
 	</div>

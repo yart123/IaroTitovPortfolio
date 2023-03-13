@@ -34,3 +34,10 @@ anime({
     easing: 'easeInBounce',
     delay: 2000
 });
+
+anime({
+    targets: '.loading_spinner',
+    opacity: ['0%', '25%'],
+    easing: 'easeInBounce',
+    delay: 2000
+});

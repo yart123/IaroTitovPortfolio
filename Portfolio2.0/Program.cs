@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 
 namespace Portfolio
 {
@@ -17,13 +12,29 @@ namespace Portfolio
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                 .ConfigureAppConfiguration((hostingContext, config) =>
+                 {
+                     var settings = config.Build();
+                     string connString = settings["ConnectionStrings:AppConfig"];
+                     if (connString != null)    
+                        config.AddAzureAppConfiguration(settings["ConnectionStrings:AppConfig"]);
+                 })
                 .ConfigureWebHostDefaults(webBuilder =>
-                webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    var settings = config.Build();
-                    config.AddAzureAppConfiguration(settings["ConnectionStrings:AppConfig"]);
-                }).UseStartup<Startup>());
+                    var port = Environment.GetEnvironmentVariable("PORT");
+                    if (port != null)
+                    {
+                        webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://*:" + port);
+                    }
+                    else
+                    {
+                        webBuilder.UseStartup<Startup>();
+                    }
+                });
+        }
     }
 }
